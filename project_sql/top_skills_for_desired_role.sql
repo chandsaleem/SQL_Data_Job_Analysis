@@ -18,7 +18,10 @@ WITH top_paying_jobs AS (
 )
 
 SELECT 
-    *
+    skills,
+    COUNT(*) AS skill_count
 FROM top_paying_jobs AS tpj
 INNER JOIN skills_job_dim AS sjd ON tpj.job_id = sjd.job_id
-INNER JOIN skills_dim AS sd ON sjd.skill_id = sd.skill_id;
+INNER JOIN skills_dim AS sd ON sjd.skill_id = sd.skill_id
+GROUP BY skills
+ORDER BY skill_count DESC;
